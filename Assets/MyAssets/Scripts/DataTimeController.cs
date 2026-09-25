@@ -55,6 +55,26 @@ public class DataTimeController : MonoBehaviour
     {
         return GetCurrentDateTime().ToString("HH");
     }
+    
+    public float GetSecondsFloat()
+    {
+        return GetCurrentDateTime().Second;
+    }
+    
+    public float GetMiliSecondsFloat()
+    {
+        return GetCurrentDateTime().Millisecond;
+    }
+
+    public float GetMinutesFloat()
+    {
+        return GetCurrentDateTime().Minute;
+    }
+
+    public float GetHoursFloat()
+    {
+        return GetCurrentDateTime().Hour;
+    }
 
     public string GetDays()
     {

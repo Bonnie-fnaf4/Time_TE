@@ -44,8 +44,6 @@ public class NetworkController : MonoBehaviour
                     
                     Debug.Log(data.time);
                     
-                    Debug.Log($"Ответ: {webRequest.downloadHandler.text}");
-                    
                     break;
             }
         }
