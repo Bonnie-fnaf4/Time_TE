@@ -6,33 +6,46 @@ using UnityEngine.Networking;
 
 public class NetworkController : MonoBehaviour
 {
+    public Action<TimeData.Data> GetData;
+    
     [SerializeField] private string _url = "https://yandex.com/time/sync.json";
+    
+    // void Start()
+    // {
+    //     GetRequest();
+    // }
 
-    void Start()
+    public void GetRequest()
     {
-        // Запускаем корутину для отправки запроса
-        StartCoroutine(GetRequest(_url));
+        StartCoroutine(GetRequestCoroutine(_url));
     }
 
-    IEnumerator GetRequest(string url)
+    IEnumerator GetRequestCoroutine(string url)
     {
-        // Создаем GET-запрос
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
-            // Отправляем запрос и ждем завершения
             yield return webRequest.SendWebRequest();
-
-            // Проверяем на ошибки
+            
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.ConnectionError:
+                    Debug.LogError($"Ошибка: Подключения");
+                    break;
                 case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError($"Ошибка: Ошибка получения данных");
+                    break;
                 case UnityWebRequest.Result.ProtocolError:
                     Debug.LogError($"Ошибка: {webRequest.error}");
                     break;
                 case UnityWebRequest.Result.Success:
-                    // Получаем текстовый ответ от сервера
+                    
+                    var data = JsonUtility.FromJson<TimeData.Data>(webRequest.downloadHandler.text);
+                    GetData?.Invoke(data);
+                    
+                    Debug.Log(data.time);
+                    
                     Debug.Log($"Ответ: {webRequest.downloadHandler.text}");
+                    
                     break;
             }
         }
