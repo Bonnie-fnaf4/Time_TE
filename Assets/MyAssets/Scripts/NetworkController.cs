@@ -8,7 +8,7 @@ public class NetworkController : MonoBehaviour
 {
     public Action<TimeData.Data> GetData;
     
-    [SerializeField] private string _url = "https://yandex.com/time/sync.json";
+    [SerializeField] private string _url = "https://use.ntpjs.org/v1/time.json";
     
     // void Start()
     // {
@@ -42,7 +42,7 @@ public class NetworkController : MonoBehaviour
                     var data = JsonUtility.FromJson<TimeData.Data>(webRequest.downloadHandler.text);
                     GetData?.Invoke(data);
                     
-                    Debug.Log(data.time);
+                    Debug.Log(data.now);
                     
                     break;
             }

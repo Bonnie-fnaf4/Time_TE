@@ -37,7 +37,8 @@ public class DataTimeController : MonoBehaviour
 
     private DateTimeOffset GetCurrentDateTime()
     {
-        var date = DateTimeOffset.FromUnixTimeMilliseconds(_timeData.currentData.time + (long)_currentTimestampMs);
+        var unixMs = (long)(_timeData.currentData.now * 1000.0);
+        var date = DateTimeOffset.FromUnixTimeMilliseconds(unixMs + (long)_currentTimestampMs);
         return date.LocalDateTime;
     }
 

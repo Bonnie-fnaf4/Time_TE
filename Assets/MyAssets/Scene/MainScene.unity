@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9225da712c063724ba29087f587d5055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _url: https://yandex.com/time/sync.json
+  _url: https://use.ntpjs.org/v1/time.json
 --- !u!1 &1143304186
 GameObject:
   m_ObjectHideFlags: 0
